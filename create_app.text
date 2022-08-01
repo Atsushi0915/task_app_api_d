@@ -1,0 +1,26 @@
+フォルダ作成（dockerfile の入ったフォルダ名を変更）
+task_app_api_d   => 変更（新しく作ったフォルダ　dockerfile内の「task_app_api_d」をVSccode上で変更）
+
+コマンド入力
+docker compose run --no-deps web rails new . --force --database=postgresql
+
+##  Linux
+##  sudo chown -R $USER:$USER .
+
+docker-compose build
+
+host: db
+username: task_app_api_d
+password: password
+
+docker-compose run web rails db:create
+
+docker-compose up
+
+#################################################################
+
+git config --global user.name "Atsushi0915"
+git config --global user.email "w_atsushi_0915@outlook.jp"
+git status
+git add -A
+git commit -m "最初のコミット" 

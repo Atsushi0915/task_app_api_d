@@ -1,0 +1,21 @@
+version: "3.9"
+services:
+  db:
+    image: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./tmp/db:/var/lib/postgresql/data
+    environment: #この行がDocker公式に載ってない。
+      POSTGRES_DB: task_app_api_d_db
+      POSTGRES_USER: task_app_api_d
+      POSTGRES_PASSWORD: password
+  web:
+    build: .
+    command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3011 -b '0.0.0.0'"
+    volumes:
+      - .:/task_app_api_d
+    ports:
+      - "3011:3011"
+    depends_on:
+      - db
